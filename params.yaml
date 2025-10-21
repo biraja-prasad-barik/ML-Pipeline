@@ -5,7 +5,7 @@ feature_engineering:
   max_features: 3000
 
 model_building:
-  model_name: LogisticRegression
-  model_params:
-    C: 1.0
-    solver: 'liblinear'  
+  model_name: RandomForestClassifier  
+  random_state: 2                   
+  model_params:                     
+    n_estimators: 25

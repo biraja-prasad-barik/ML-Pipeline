@@ -87,7 +87,7 @@ def save_data(train_data: pd.DataFrame, test_data: pd.DataFrame, data_path: str)
 def main():
     try:
         # Full path specify karte hue
-        params = load_params(params_path=r'C:\Users\kbari\OneDrive\Desktop\ML OPS\ML-Pipeline\params.yaml')
+        params = load_params(params_path=r'params.yaml')
         test_size = params['data_ingestion']['test_size']
         data_url = 'https://raw.githubusercontent.com/biraja-prasad-barik/Dataset/refs/heads/main/spam.csv'
         df = load_data(data_url)

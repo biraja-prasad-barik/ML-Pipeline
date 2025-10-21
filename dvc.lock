@@ -5,8 +5,8 @@ stages:
     deps:
     - path: src/data_ingestion.py
       hash: md5
-      md5: eaebdba5dfa6ec5c71150cd794c2767e
-      size: 3709
+      md5: 421f6933032e1df6fb4f9f7f10014806
+      size: 3658
     params:
       params.yaml:
         data_ingestion.test_size: 0.2
@@ -44,38 +44,46 @@ stages:
       nfiles: 2
     - path: src/feature_engineering.py
       hash: md5
-      md5: 33108f77837ecd03453247846b23beb5
-      size: 3908
+      md5: 9000c4cbafcaca3464664391d46659d2
+      size: 3909
+    params:
+      params.yaml:
+        feature_engineering.max_features: 3000
     outs:
     - path: data/processed
       hash: md5
-      md5: 75e218e1ef3eca0fbee7bf147502a2e7.dir
-      size: 1179996
+      md5: 5ffffe4acfa2a02c9d301a71491f755a.dir
+      size: 63651484
       nfiles: 2
   model_building:
     cmd: python src/model_building.py
     deps:
     - path: data/processed
       hash: md5
-      md5: 75e218e1ef3eca0fbee7bf147502a2e7.dir
-      size: 1179996
+      md5: 5ffffe4acfa2a02c9d301a71491f755a.dir
+      size: 63651484
       nfiles: 2
     - path: src/model_building.py
       hash: md5
       md5: a3926834e80c132629f907980e51acb1
       size: 5491
+    params:
+      params.yaml:
+        model_building.model_params:
+          n_estimators: 25
+        model_building.random_state: 2
     outs:
     - path: models/model.pkl
       hash: md5
-      md5: c198ad0606c7f908d1fe1a1dcd98f8da
-      size: 1123
+      md5: d4535b712a7d8b941c65bcdf3277f8b2
+      size: 1734269
   model_evaluation:
     cmd: python src/model_evaluation.py
     deps:
     - path: models/model.pkl
       hash: md5
-      md5: c198ad0606c7f908d1fe1a1dcd98f8da
-      size: 1123
+      md5: d4535b712a7d8b941c65bcdf3277f8b2
+      size: 1734269
     - path: src/model_evaluation.py
       hash: md5
       md5: 553abb63c25d201ab4732efe779df04d
@@ -83,5 +91,5 @@ stages:
     outs:
     - path: reports/metrics.json
       hash: md5
-      md5: 4533ef740d7f9ec85df2eb1f14523d42
-      size: 145
+      md5: 485fb4ec81499fbe16663e062b504a4b
+      size: 130
